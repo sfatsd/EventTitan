@@ -7,6 +7,7 @@
 	var lat = 37.38;
 
 	function init() {
+		console.log("test");
 		// Register event listeners
 		$('nearby-btn').addEventListener('click', loadNearbyItems);
 		$('fav-btn').addEventListener('click', loadFavoriteItems);
