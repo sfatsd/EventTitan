@@ -33,7 +33,7 @@ public class TicketMasterAPI implements ExternalAPI {
 		}
 		// Encode term in url since it may contain special characters
 		term = urlEncodeHelper(term);
-		        // Make your url query part like: "apikey=12345&geoPoint=abcd&keyword=music"
+		        // from TicketMaster: "apikey=12345&geoPoint=abcd&keyword=music"
 		String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=50", API_KEY, geoHash, term);
 		try {
 			// Create a HTTP connection between your Java application and TicketMaster based on url
@@ -47,7 +47,8 @@ public class TicketMasterAPI implements ExternalAPI {
 			System.out.println("\nSending 'GET' request to URL : " + url + "?" + query);
 			System.out.println("Response Code : " + responseCode);
 			
-			// Now read response body to get events data
+			
+			//read response body to get events data
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputLine;
 			StringBuilder response = new StringBuilder();
@@ -152,7 +153,7 @@ public class TicketMasterAPI implements ExternalAPI {
 		return itemList;
 	}
 
-              // return the first venue of an event object
+              // return the first venue(location) of an event object
 	private JSONObject getVenue(JSONObject event) throws JSONException {
 		if (!event.isNull("_embedded")) {
 			JSONObject embedded = event.getJSONObject("_embedded");
@@ -166,7 +167,7 @@ public class TicketMasterAPI implements ExternalAPI {
 		return null;
 	}
 
-              // Get first image url from an event object
+              // Get only first image url from an event object
 	private String getImageUrl(JSONObject event) throws JSONException {
 		if (!event.isNull("images")) {
 			JSONArray imagesArray = event.getJSONArray("images");

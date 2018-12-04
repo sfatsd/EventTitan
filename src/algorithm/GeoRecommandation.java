@@ -27,15 +27,14 @@ public class GeoRecommandation {
 			allCategories.add("");
 		}
 
-		Set<Item> recommendedItems = new HashSet<>(); // step 3
+		Set<Item> recommendedItems = new HashSet<>(); 
 		for (String category : allCategories) {
 			List<Item> items = conn.searchItems(userId, lat, lon, category); // call external API
 			recommendedItems.addAll(items);
 		}
 
-		// Student question: why we use list now instead of set?
-		// Answer: because we will have ranking now.
-		List<Item> filteredItems = new ArrayList<>(); // step 4
+
+		List<Item> filteredItems = new ArrayList<>(); 
 		for (Item item : recommendedItems) {
 			if (!favoriteItems.contains(item.getItemId())) {
 				filteredItems.add(item);
@@ -46,9 +45,7 @@ public class GeoRecommandation {
 		Collections.sort(filteredItems, new Comparator<Item>() {
 			@Override
 			public int compare(Item item1, Item item2) {
-				// Student question: can we make this ranking even better with
-				// more dimensions?
-				// What other feathers can be used here?
+
 				double distance1 = getDistance(item1.getLatitude(), item1.getLongitude(), lat, lon);
 				double distance2 = getDistance(item2.getLatitude(), item2.getLongitude(), lat, lon);
 				// return the increasing order of distance.
