@@ -8,7 +8,7 @@
 
 	function init() {
 		console.log("test");
-		// Register event listeners
+		// Register event listeners,  if click, run
 		$('nearby-btn').addEventListener('click', loadNearbyItems);
 		$('fav-btn').addEventListener('click', loadFavoriteItems);
 		$('recommend-btn').addEventListener('click', loadRecommendedItems);
@@ -19,12 +19,12 @@
 	
 	
 	function $(tag, options) {
-		if (!options) {
+		if (!options) { // if no option, just return tag
 			return document.getElementById(tag);
 		}
-
+		// if has option, create a element
 		var element = document.createElement(tag);
-
+		// put into into created element
 		for ( var option in options) {
 			if (options.hasOwnProperty(option)) {
 				element[option] = options[option];
@@ -53,7 +53,7 @@
 	function ajax(method, url, data, callback, errorHandler) {
 		var xhr = new XMLHttpRequest();
 
-		xhr.open(method, url, true);
+		xhr.open(method, url, true); 
 
 		xhr.onload = function() {
 			switch (xhr.status) {
@@ -121,7 +121,7 @@
 		// title
 		var title = $('a', {
 			href : item.url,
-			target : '_blank',
+			target : '_blank', // open in new page
 			className : 'item-name'
 		});
 		title.innerHTML = item.name;
@@ -137,7 +137,7 @@
 		var stars = $('div', {
 			className : 'stars'
 		});
-
+		// no rating information from TicketMaster now : (
 		for (var i = 0; i < item.rating; i++) {
 			var star = $('i', {
 				className : 'fa fa-star'
@@ -190,9 +190,9 @@
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(onPositionUpdated,
 					onLoadPositionFailed, {
-						maximumAge : 60000
+						maximumAge : 60000  //max cached position age  (ms)
 					});
-			showLoadingMessage('Retrieving your location...');
+			showLoadingMessage('Retrieving your location...'); //async
 		} else {
 			onLoadPositionFailed();
 		}

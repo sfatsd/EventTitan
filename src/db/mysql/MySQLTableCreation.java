@@ -16,7 +16,7 @@ public class MySQLTableCreation {
 			// This is java.sql.Connection. Not com.mysql.jdbc.Connection.
 			Connection conn = null;
 
-			// Step 1 Connect to MySQL.
+			//Connect to MySQL.
 			try {
 				System.out.println("Connecting to \n" + MySQLDBUtil.URL);
 				conn = DriverManager.getConnection(MySQLDBUtil.URL);
@@ -28,7 +28,7 @@ public class MySQLTableCreation {
 			if (conn == null) {
 				return;
 			}
-			// Step 2 Drop tables in case they exist.
+			//Drop tables in case they exist.
 			Statement stmt = conn.createStatement();
 
 			String sql = "DROP TABLE IF EXISTS history";
@@ -44,7 +44,7 @@ public class MySQLTableCreation {
 			stmt.executeUpdate(sql);
 
 			
-			// Step 3. Create new tables.
+			//Create new tables.
 			sql = "CREATE TABLE items " + "(item_id VARCHAR(255) NOT NULL, " + " name VARCHAR(255), "
 					+ "city VARCHAR(255), " + "state VARCHAR(255), " + "country VARCHAR(255), "
 					+ "zipcode VARCHAR(255), " + "rating FLOAT," + "address VARCHAR(255), " + "latitude FLOAT, "
